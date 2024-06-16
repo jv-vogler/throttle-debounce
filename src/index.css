@@ -11,10 +11,28 @@
   *,
   *::before,
   *::after {
-    @apply m-0 p-0 box-border;
+    @apply m-0 box-border p-0;
   }
 
   body {
-    @apply font-automata-black h-screen bg-slate-900 text-zinc-300 antialiased;
+    @apply h-screen bg-slate-900 font-automata-black text-zinc-300 antialiased;
   }
+}
+
+@keyframes fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.progress-bar {
+  height: 2px;
+  background-color: limegreen;
+}
+
+.progress-bar-animating {
+  animation: fill linear forwards;
 }
