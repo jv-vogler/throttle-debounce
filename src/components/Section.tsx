@@ -3,13 +3,15 @@ import { useCallback, useEffect, useState } from 'react'
 import { debounce, throttle } from '../utils'
 
 const MAX_RANGE_VALUE = 2000
+const DEFAULT_DELAY = 1000
+const LOW_RANGE_VALUE = 400
 
 type SectionProps = {
   mode: 'throttle' | 'debounce' | 'default'
 }
 
 export const Section = ({ mode }: SectionProps) => {
-  const [delay, setDelay] = useState(500)
+  const [delay, setDelay] = useState(DEFAULT_DELAY)
   const [progress, setProgress] = useState(0)
   const [clickCount, setClickCount] = useState(0)
   const [eventCount, setEventCount] = useState(0)
@@ -79,12 +81,12 @@ export const Section = ({ mode }: SectionProps) => {
 
     if (value === 0) {
       setError(`${mode} disabled.`)
-      setRangeClassColor('accent-red-500')
+      setRangeClassColor('accent-red-400')
       setDelayClassColor('text-red-500')
       return
     }
 
-    if (value < 300) {
+    if (value < LOW_RANGE_VALUE) {
       setError('Low value, results will be hard to notice')
       setRangeClassColor('accent-orange-500')
       setDelayClassColor('text-orange-500')
@@ -98,7 +100,9 @@ export const Section = ({ mode }: SectionProps) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <h1 className="text-center text-4xl font-bold first-letter:capitalize">{mode}</h1>
+      <h1 className="text-center text-4xl font-bold drop-shadow-text first-letter:capitalize">
+        {mode}
+      </h1>
 
       {mode !== 'default' && (
         <div className="flex w-full flex-col items-center">
@@ -112,7 +116,9 @@ export const Section = ({ mode }: SectionProps) => {
               onChange={handleRangeChange}
               className={`${rangeClassColor}`}
             />
-            <p className="w-16 text-end">{delay}ms</p>
+            <p className="w-16 text-end drop-shadow-text">
+              <span className="pr-0.5 font-bold">{delay}</span>ms
+            </p>
           </div>
           <p className={`h-8 first-letter:capitalize ${delayClassColor}`}>{error}</p>
         </div>
@@ -124,15 +130,16 @@ export const Section = ({ mode }: SectionProps) => {
             <div className="absolute left-1 top-1 -z-10 h-full w-full rounded-lg bg-violet-900" />
             <button
               onClick={handleButtonClick}
-              className="select-none rounded-lg bg-violet-600 px-4 py-1 transition-transform active:translate-x-1 active:translate-y-1"
+              className="select-none rounded-lg bg-violet-700 px-4 py-1 font-bold transition-transform active:translate-x-1 active:translate-y-1"
             >
-              Keep clicking
+              <div className="drop-shadow-text">Keep clicking</div>
             </button>
           </div>
         </div>
+
         <div className="flex w-52">
-          <div className="min-w-24 text-end">Click count:</div>
-          <div className="px- w-8 text-center">{clickCount}</div>
+          <div className="min-w-24 text-end drop-shadow-text">Click count:</div>
+          <div className="w-8 text-center font-bold drop-shadow-text">{clickCount}</div>
         </div>
       </div>
 
@@ -146,18 +153,20 @@ export const Section = ({ mode }: SectionProps) => {
             />
           )}
         </div>
+
         <div className="flex w-52">
-          <div className="min-w-24 text-end">Event count:</div>
-          <div className="px- w-8 text-center">{eventCount}</div>
+          <div className="min-w-24 text-end drop-shadow-text">Event count:</div>
+          <div className="w-8 text-center font-bold drop-shadow-text">{eventCount}</div>
         </div>
       </div>
+
       <div className="relative h-8 max-w-fit">
         <div className="absolute left-1 top-1 -z-10 h-full w-full rounded-lg bg-red-900" />
         <button
           onClick={resetCount}
-          className="select-none rounded-lg bg-red-600 px-4 py-1 transition-transform active:translate-x-1 active:translate-y-1"
+          className="select-none rounded-lg bg-red-700 px-4 py-1 transition-transform active:translate-x-1 active:translate-y-1"
         >
-          Reset
+          <span className="text-white drop-shadow-text">Reset</span>
         </button>
       </div>
     </div>

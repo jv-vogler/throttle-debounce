@@ -15,7 +15,7 @@
   }
 
   body {
-    @apply h-screen bg-slate-900 font-automata-black text-zinc-300 antialiased;
+    @apply flex min-h-screen items-center justify-center bg-zinc-900 font-automata-black text-zinc-300 antialiased;
   }
 }
 

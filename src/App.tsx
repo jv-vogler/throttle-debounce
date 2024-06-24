@@ -2,13 +2,12 @@ import { Section } from './components/Section'
 
 function App() {
   return (
-    <div className="container m-auto flex h-screen flex-col gap-16 py-8">
+    <div className="container m-auto flex flex-col items-center justify-center gap-16 py-8">
       <Section mode="default" />
-      <hr className="w-4/5 self-center md:w-2/5" />
-      <Section mode="throttle" />
-      <hr className="w-4/5 self-center md:w-2/5" />
-      <Section mode="debounce" />
-      <hr className="flex w-4/5 self-center md:invisible md:w-2/5" />
+      <div className="flex flex-col gap-16 lg:flex-row lg:gap-40">
+        <Section mode="throttle" />
+        <Section mode="debounce" />
+      </div>
     </div>
   )
 }

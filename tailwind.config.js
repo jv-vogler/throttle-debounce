@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         'automata-black': ['AutomataBlack', 'sans-serif'],
       },
+      dropShadow: {
+        text: '0 1.2px 1.2px rgba(0, 0, 0, 1)',
+      },
     },
   },
   plugins: [],
